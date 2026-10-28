@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CyberSafe Student Hub</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:Arial,Helvetica,sans-serif;line-height:1.6;color:#1f2937;background:#f2f7fb}header{background:#12304a;color:white;text-align:center;padding:28px 18px}header h1{margin:0}nav{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;background:#0b2236;padding:12px}nav a{color:white;text-decoration:none;padding:7px 12px;border-radius:6px}nav a:hover{background:#176b87}main{max-width:1000px;margin:24px auto;padding:0 16px}section{background:white;padding:22px;margin:18px 0;border-radius:12px;box-shadow:0 3px 12px #12304a12}h2{color:#12304a;margin-top:0}h3{color:#176b87}.slogan{font-weight:bold;color:#247a52;font-size:1.2rem}.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}.card{border:1px solid #d8e4ed;border-radius:10px;padding:16px;background:#fbfdff}label{display:block;margin:8px 0}input[type=checkbox],input[type=radio]{margin-right:8px}button{border:0;border-radius:7px;padding:10px 15px;cursor:pointer;background:#176b87;color:white;font-size:1rem;margin-top:8px}button:hover{background:#12304a}#checkCount,#quizResult{font-weight:bold;color:#247a52}.question{border-top:1px solid #e1e8ef;padding:12px 0}.note{color:#4b5563}footer{text-align:center;padding:20px;background:#12304a;color:white}
+</style></head>
+<body>
+<header><h1>CyberSafe Student Hub</h1><p>Simple advice to help students stay safer online</p></header>
+<nav aria-label="Main navigation"><a href="#learn">Learn</a><a href="#checklist">Safety checklist</a><a href="#quiz">Quick quiz</a><a href="#about">About this website</a></nav>
+<main>
+<section><h2>Think before you click</h2><p>The internet is useful for studying, shopping and keeping in touch. A few careful habits can help protect your accounts and personal information.</p><p class="slogan">STOP. CHECK. THEN CLICK.</p></section>
+<section id="learn"><h2>Learn the basics</h2><div class="cards">
+<article class="card"><h3>1. Spot phishing</h3><p>Phishing messages try to trick you into sharing passwords, bank details or other private information.</p><ul><li>Check the sender and full web address.</li><li>Be careful with urgent messages.</li><li>Do not open unexpected attachments or links.</li><li>When unsure, use the organisation's official website.</li></ul></article>
+<article class="card"><h3>2. Use strong passwords</h3><p>Use a long, unique password or passphrase for each important account.</p><ul><li>Do not reuse your email password.</li><li>Never share your password.</li><li>Consider a trusted password manager.</li></ul></article>
+<article class="card"><h3>3. Turn on MFA</h3><p>Multi-factor authentication (MFA) adds another check when you sign in.</p><ul><li>Enable MFA where available.</li><li>Never approve a sign-in you did not start.</li><li>Keep recovery details up to date.</li></ul></article>
+</div></section>
+<section id="checklist"><h2>My online-safety checklist</h2><p>Tick each action you have completed. The counter should update automatically.</p><div id="checks"><label><input type="checkbox" class="safety-check">I use unique passwords for important accounts.</label><label><input type="checkbox" class="safety-check">I have enabled MFA where available.</label><label><input type="checkbox" class="safety-check">I check links and senders before clicking.</label><label><input type="checkbox" class="safety-check">I keep my devices and apps updated.</label><label><input type="checkbox" class="safety-check">I know how to report a suspicious message.</label></div><p id="checkCount" aria-live="polite">Completed: 0 of 5</p></section>
+<section id="quiz"><h2>Quick safety quiz</h2><p>Choose one answer for each question, then check your answers.</p><form id="quizForm">
+<div class="question"><p><strong>1. You receive an unexpected email asking you to sign in urgently. What should you do?</strong></p><label><input type="radio" name="q1" value="a">Click the link straight away.</label><label><input type="radio" name="q1" value="b">Check the sender and visit the official website independently.</label><label><input type="radio" name="q1" value="c">Forward it to all your friends.</label></div>
+<div class="question"><p><strong>2. What is a good password habit?</strong></p><label><input type="radio" name="q2" value="a">Reuse one easy password everywhere.</label><label><input type="radio" name="q2" value="b">Write your password in a public post.</label><label><input type="radio" name="q2" value="c">Use a long, unique password for each account.</label></div>
+<div class="question"><p><strong>3. What does MFA do?</strong></p><label><input type="radio" name="q3" value="a">Adds another step to help verify your sign-in.</label><label><input type="radio" name="q3" value="b">Makes all messages trustworthy.</label><label><input type="radio" name="q3" value="c">Removes the need to update devices.</label></div>
+<button type="submit">Check my answers</button> <button type="reset">Try again</button></form><p id="quizResult" aria-live="polite"></p></section>
+<section id="about"><h2>About this website</h2><p>CyberSafe Student Hub is an educational prototype sharing basic online-safety advice with students. It demonstrates a simple website, an interactive checklist and a short quiz.</p><p class="note"><strong>Important:</strong> This website is for learning only. It does not scan links, detect real phishing attacks, store answers or collect personal information. Follow your school or organisation's process to report suspicious messages.</p></section>
+</main><footer><p>CyberSafe Student Hub · STOP. CHECK. THEN CLICK.</p></footer>
+<script>
+document.addEventListener('DOMContentLoaded',function(){
+ const boxes=document.querySelectorAll('.safety-check');const count=document.getElementById('checkCount');
+ function updateCount(){count.textContent='Completed: '+document.querySelectorAll('.safety-check:checked').length+' of '+boxes.length;}
+ boxes.forEach(function(box){box.addEventListener('change',updateCount);});
+ const form=document.getElementById('quizForm');const result=document.getElementById('quizResult');const answers={q1:'b',q2:'c',q3:'a'};
+ form.addEventListener('submit',function(event){event.preventDefault();let score=0;let missing=0;Object.keys(answers).forEach(function(q){const selected=form.querySelector('input[name="'+q+'"]:checked');if(!selected){missing++;}else if(selected.value===answers[q]){score++;}});if(missing){result.textContent='Please answer all 3 questions before checking your score.';}else{result.textContent='You scored '+score+' out of 3. '+(score===3?'Excellent work!':'Review the learning cards and try again.');}});
+ form.addEventListener('reset',function(){result.textContent='';});updateCount();
+});
+</script></body></html>
